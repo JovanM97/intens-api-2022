@@ -2,11 +2,12 @@ FROM maven:3.8.4-jdk-8 AS build
 WORKDIR /app
 COPY pom.xml .  
 COPY src ./src/  
-RUN mvn clean package -DskipTests
+ENV PORT 8080
+RUN mvn clean package 
 
 FROM openjdk:8-jre-slim 
 WORKDIR /app
 COPY --from=build /app/target/praksa2022-0.0.1-SNAPSHOT.jar ./app.jar  
-ENV PORT 8080
+#ENV PORT 8080
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
