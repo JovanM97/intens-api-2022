@@ -24,7 +24,7 @@ jobs:
     - name: Build and push Docker Images
       uses: docker/build-push-action@v5.4.0
       with:
-        tags: jovanm997/java-app:latest
+        tags: ${{ secrets.DOCKER_USER }}/java-app:latest
         registry: docker.io
         dockerfile: Dockerfile
         push: true
